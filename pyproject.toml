@@ -1,0 +1,70 @@
+[project]
+name = "rilog"
+dynamic = ["version"]
+description = "Enhanced console logging with progress tracking."
+readme = "README.md"
+requires-python = ">= 3.12"
+keywords = ["Terminal", "Console", "Rich", "Logging", "Logger", "Log"]
+authors = [{ name = "Bastien Soucasse", email = "bastien.soucasse@icloud.com" }]
+maintainers = [{ name = "Bastien Soucasse", email = "bastien.soucasse@icloud.com" }]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["ruff", "mypy", "pytest"]
+
+[project.urls]
+Source = "https://github.com/bastiensoucasse/rilog"
+Issues = "https://github.com/bastiensoucasse/rilog/issues"
+
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.hook.vcs]
+version-file = "_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/rilog"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.rye]
+managed = true
+dev-dependencies = ["rilog[dev]"]
+
+[tool.rye.scripts]
+format = "ruff format"
+lint = "ruff check --fix"
+type-check = "mypy src/rilog tests"
+test = "pytest src/rilog tests"
+
+[tool.ruff]
+line-length = 120
+preview = true
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["CPY"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*" = ["D", "S101"]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.mypy]
+strict = true
