@@ -74,27 +74,29 @@ class Logger:
         else:
             self._console.print(message)
 
-    def log(self, message: str, *, live: bool = False) -> None:
-        """Prints a message to the console with the default log level (info).
+    def log(self, *logs: object, live: bool = False) -> None:
+        """Prints messages or objects to the console with the default log level (info).
 
         Args:
-            message: Message to log.
+            logs: Messages or objects to log.
             live: Whether to log live (temporarily) or permanently. \
                 Defaults to False.
         """
-        if self._prefix:
-            message = f"[bold magenta]{self._prefix}[/]{message}"
-        self._print(message, live=live)
+        prefix = f"[bold magenta]{self._prefix}[/]" if self._prefix else ""
+        for log in logs:
+            self._print(f"{prefix}{log!s}", live=live)
 
-    def warn(self, message: str, *, live: bool = False) -> None:
-        """Prints a message to the console with the warning level.
+    def warn(self, *logs: object, live: bool = False) -> None:
+        """Prints messages or objects to the console with the warning log level.
 
         Args:
-            message: Message to log.
+            logs: Messages or objects to log.
             live: Whether to log live (temporarily) or permanently. \
                 Defaults to False.
         """
-        self._print(f"[bold yellow]Warning: {message}", live=live)
+        prefix = "[bold yellow]Warning: "
+        for log in logs:
+            self._print(f"{prefix}{log!s}", live=live)
 
     def set_prefix(self, prefix: str) -> None:
         """Defines a prefix for future logs.
