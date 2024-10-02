@@ -24,12 +24,24 @@ if TYPE_CHECKING:
 class Logger:
     """Enhanced logger with progress tracking."""
 
+    _console: Console
+    """Rich high-level console interface."""
+
+    _live: Live | None
+    """Rich auto-updating live display."""
+
+    _progress: Progress | None
+    """Rich auto-updating progress bar."""
+
+    _prefix: str
+    """Info log prefix."""
+
     def __init__(self) -> None:
         """Initializes an enhanced logger."""
-        self._console: Console = Console()
-        self._live: Live | None = None
-        self._progress: Progress | None = None
-        self._prefix: str = ""
+        self._console = Console()
+        self._live = None
+        self._progress = None
+        self._prefix = ""
 
     def _progress_print(self, message: str, *, live: bool) -> None:
         if self._progress is None:
