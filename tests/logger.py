@@ -1,1 +1,1 @@
-"""Tests for the enhanced logger with progress tracking module."""
+"""Tests for the custom logger."""

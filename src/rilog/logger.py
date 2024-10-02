@@ -1,4 +1,4 @@
-"""Enhanced logger with progress tracking module."""
+"""Custom logger."""
 
 from __future__ import annotations
 

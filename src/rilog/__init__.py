@@ -1,4 +1,4 @@
-"""Rilog module."""
+"""Enhanced console logging with progress tracking."""
 
 from importlib.metadata import version
 
