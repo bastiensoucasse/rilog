@@ -1,6 +1,9 @@
 """Enhanced logger with progress tracking module."""
 
-from collections.abc import Iterable, Iterator, Sized
+from __future__ import annotations
+
+from collections.abc import Sized
+from typing import TYPE_CHECKING
 
 from rich.console import Console
 from rich.live import Live
@@ -13,6 +16,9 @@ from rich.progress import (
     TextColumn,
     TimeRemainingColumn,
 )
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable, Iterator
 
 
 class Logger:
