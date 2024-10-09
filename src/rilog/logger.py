@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Sized
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, TypeVar
 
 from rich.console import Console
 from rich.live import Live
@@ -19,6 +19,9 @@ from rich.progress import (
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Iterator
+
+
+_T = TypeVar("_T")
 
 
 class Logger:
@@ -110,12 +113,12 @@ class Logger:
         """Removes the prefix from future logs."""
         self._prefix = ""
 
-    def progress[T](
+    def progress(
         self,
-        data: Iterable[T],
+        data: Iterable[_T],
         total: int | None = None,
         description: str | None = None,
-    ) -> Iterator[T]:
+    ) -> Iterator[_T]:
         """Tracks progress of data iteration by logging a progress bar to the console.
 
         Args:
